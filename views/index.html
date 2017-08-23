@@ -14,4 +14,39 @@
 <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&sensor=true"></script>
 <script src='/public/js/Map.js'></script>
 <script src='/public/js/app.js'></script>
+
+
+<!-- client side version of data-->
+<script>
+  var hotels = {{ hotels | dump | safe }};
+  var restaurants = {{ restaurants | dump | safe }};
+  var activities = {{ activities | dump | safe }};
+  console.log(hotels);
+
+$('#selectHotels').remove()
+  //client side scripting
+$(document).ready(function(){
+    hotels.forEach(function(hotel) {
+    $('#selectHotels').append($('<option>', {
+      value: `${hotel.id}`,
+      text: `${hotel.name}`
+    }))
+  })
+  restaurants.forEach(function(restaurant) {
+    $('#selectRestaurants').append($('<option>', {
+      value: `${restaurant.id}`,
+      text: `${restaurant.name}`
+    }))
+  })
+  activities.forEach(function(activity) {
+    $('#selectActivities').append($('<option>', {
+      value: `${activity.id}`,
+      text: `${activity.name}`
+    }))
+  })
+})
+
+  // $('#selectRestaurants')
+  // $('#selectActivities')
+</script>
 {% endblock %}
